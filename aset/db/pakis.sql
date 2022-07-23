@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Waktu pembuatan: 18 Jun 2022 pada 04.16
--- Versi server: 10.3.15-MariaDB
--- Versi PHP: 7.3.6
+-- Host: 127.0.0.1
+-- Generation Time: Jul 21, 2022 at 11:11 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
@@ -53,7 +53,7 @@ CREATE TABLE `barang` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_keluar`
+-- Table structure for table `barang_keluar`
 --
 
 CREATE TABLE `barang_keluar` (
@@ -68,7 +68,7 @@ CREATE TABLE `barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Trigger `barang_keluar`
+-- Triggers `barang_keluar`
 --
 DELIMITER $$
 CREATE TRIGGER `kartu_stok_update_keluar` AFTER UPDATE ON `barang_keluar` FOR EACH ROW UPDATE kartu_stok SET kartu_stok.jumlah_keluar = new.jumlah_keluar WHERE kartu_stok.id_barang_keluar = new.id_barang_keluar
@@ -82,7 +82,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_masuk`
+-- Table structure for table `barang_masuk`
 --
 
 CREATE TABLE `barang_masuk` (
@@ -96,7 +96,7 @@ CREATE TABLE `barang_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Trigger `barang_masuk`
+-- Triggers `barang_masuk`
 --
 DELIMITER $$
 CREATE TRIGGER `kartu_stok_update` AFTER UPDATE ON `barang_masuk` FOR EACH ROW UPDATE kartu_stok SET kartu_stok.jumlah_masuk = new.jumlah WHERE kartu_stok.id_barang_masuk = new.id_barang_masuk
@@ -110,7 +110,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `golongan_produk`
+-- Table structure for table `golongan_produk`
 --
 
 CREATE TABLE `golongan_produk` (
@@ -121,7 +121,7 @@ CREATE TABLE `golongan_produk` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kartu_stok`
+-- Table structure for table `kartu_stok`
 --
 
 CREATE TABLE `kartu_stok` (
@@ -138,14 +138,14 @@ CREATE TABLE `kartu_stok` (
   `id_pelanggan` varchar(20) NOT NULL,
   `jumlah_masuk` int(10) NOT NULL,
   `jumlah_keluar` int(10) NOT NULL,
-  `sisa` int(10) NOT NULL DEFAULT 0,
+  `sisa` int(10) NOT NULL DEFAULT '0',
   `keterangan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
@@ -159,7 +159,7 @@ CREATE TABLE `pelanggan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sales`
+-- Table structure for table `sales`
 --
 
 CREATE TABLE `sales` (
@@ -172,7 +172,7 @@ CREATE TABLE `sales` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `stok`
+-- Table structure for table `stok`
 --
 
 CREATE TABLE `stok` (
@@ -184,7 +184,7 @@ CREATE TABLE `stok` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `supplier`
+-- Table structure for table `supplier`
 --
 
 CREATE TABLE `supplier` (
@@ -198,7 +198,7 @@ CREATE TABLE `supplier` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tmp_barang_gudang`
+-- Table structure for table `tmp_barang_gudang`
 --
 
 CREATE TABLE `tmp_barang_gudang` (
@@ -210,7 +210,7 @@ CREATE TABLE `tmp_barang_gudang` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_barang_keluar`
+-- Table structure for table `transaksi_barang_keluar`
 --
 
 CREATE TABLE `transaksi_barang_keluar` (
@@ -223,7 +223,7 @@ CREATE TABLE `transaksi_barang_keluar` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_barang_masuk`
+-- Table structure for table `transaksi_barang_masuk`
 --
 
 CREATE TABLE `transaksi_barang_masuk` (
@@ -237,13 +237,13 @@ CREATE TABLE `transaksi_barang_masuk` (
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
@@ -251,7 +251,7 @@ ALTER TABLE `barang`
   ADD KEY `id_supplier` (`id_supplier`);
 
 --
--- Indeks untuk tabel `barang_keluar`
+-- Indexes for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`id_barang_keluar`),
@@ -261,7 +261,7 @@ ALTER TABLE `barang_keluar`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `barang_masuk`
+-- Indexes for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`id_barang_masuk`),
@@ -270,13 +270,13 @@ ALTER TABLE `barang_masuk`
   ADD KEY `id_supplier` (`id_supplier`);
 
 --
--- Indeks untuk tabel `golongan_produk`
+-- Indexes for table `golongan_produk`
 --
 ALTER TABLE `golongan_produk`
   ADD PRIMARY KEY (`id_golongan_produk`);
 
 --
--- Indeks untuk tabel `kartu_stok`
+-- Indexes for table `kartu_stok`
 --
 ALTER TABLE `kartu_stok`
   ADD PRIMARY KEY (`id_kartu_stok`),
@@ -291,39 +291,39 @@ ALTER TABLE `kartu_stok`
   ADD KEY `id_transaksi_barang_keluar` (`id_transaksi_barang_keluar`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id_pelanggan`),
   ADD KEY `id_sales` (`id_sales`);
 
 --
--- Indeks untuk tabel `sales`
+-- Indexes for table `sales`
 --
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id_sales`);
 
 --
--- Indeks untuk tabel `stok`
+-- Indexes for table `stok`
 --
 ALTER TABLE `stok`
   ADD PRIMARY KEY (`id_stok`),
   ADD KEY `id_barang` (`id_barang`);
 
 --
--- Indeks untuk tabel `supplier`
+-- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indeks untuk tabel `tmp_barang_gudang`
+-- Indexes for table `tmp_barang_gudang`
 --
 ALTER TABLE `tmp_barang_gudang`
   ADD PRIMARY KEY (`id_tmp_barang_gudang`);
 
 --
--- Indeks untuk tabel `transaksi_barang_keluar`
+-- Indexes for table `transaksi_barang_keluar`
 --
 ALTER TABLE `transaksi_barang_keluar`
   ADD PRIMARY KEY (`id_transaksi_barang_keluar`),
@@ -331,60 +331,60 @@ ALTER TABLE `transaksi_barang_keluar`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
--- Indeks untuk tabel `transaksi_barang_masuk`
+-- Indexes for table `transaksi_barang_masuk`
 --
 ALTER TABLE `transaksi_barang_masuk`
   ADD PRIMARY KEY (`id_transaksi_barang_masuk`),
   ADD KEY `id_supplier` (`id_supplier`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` int(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `barang_keluar`
+-- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   MODIFY `id_barang_keluar` int(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `barang_masuk`
+-- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   MODIFY `id_barang_masuk` int(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `kartu_stok`
+-- AUTO_INCREMENT for table `kartu_stok`
 --
 ALTER TABLE `kartu_stok`
   MODIFY `id_kartu_stok` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `stok`
+-- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
   MODIFY `id_stok` int(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tmp_barang_gudang`
+-- AUTO_INCREMENT for table `tmp_barang_gudang`
 --
 ALTER TABLE `tmp_barang_gudang`
   MODIFY `id_tmp_barang_gudang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi_barang_keluar`
+-- AUTO_INCREMENT for table `transaksi_barang_keluar`
 --
 ALTER TABLE `transaksi_barang_keluar`
   MODIFY `id_transaksi_barang_keluar` int(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi_barang_masuk`
+-- AUTO_INCREMENT for table `transaksi_barang_masuk`
 --
 ALTER TABLE `transaksi_barang_masuk`
   MODIFY `id_transaksi_barang_masuk` int(20) NOT NULL AUTO_INCREMENT;
