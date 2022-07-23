@@ -1,0 +1,36 @@
+body {
+  background-color: lightgrey;
+}
+
+/*untuk sidebar*/
+
+ul hr {
+  background-color: lightblue;
+}
+
+.nav-link:hover {
+  background-color: grey;
+
+  transition: 0.4s;
+}
+
+@media only screen and (min-width: 768px) {
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+.dropdown-item:hover {
+  background-color: lightgrey;
+  transition: 0.4s;
+}
+
+.navbar {
+  background-color: green;
+}
+
+/* class card-po pada input penjualan */
+
+.card-po {
+  z-index: 1;
+}
