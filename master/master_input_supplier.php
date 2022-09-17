@@ -13,7 +13,6 @@ include '../config/validasi.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="../aset/bootstrap-4.5.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../aset/fontawesome47/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../aset/css/my_style.css">
 
 	<link rel="icon" type="image/png" href="../gambar/pakis11.png">
@@ -21,53 +20,52 @@ include '../config/validasi.php';
 </head>
 
 <body>
-	<form method="post">
 
-		<?php include '../a_navbar.php'; ?>
-
-		<br>
-		<div class="col-md-6 offset-md-3">
+	<div class="row justify-content-center">
+		<div class="col-md-4 mt-5">
 			<div class="card">
 				<div class="card-header">
-					<h4 align="center">Tambah Master Supplier</h4>
+					<h4>Tambah Master Supplier</h4>
 				</div>
 				<div class="card-body">
+					<form method="post">
 
-					<!-- kode otomatis -->
-					<?php
-					$query = mysqli_query($conn, "SELECT MAX(id_supplier) as maxID FROM supplier");
-					$data = mysqli_fetch_assoc($query);
-					$maxid = $data['maxID'];
-					$urut = (int) substr($maxid, 4);
-					$urut++;
-					$char = 'SUP-';
-					$id_supplier = $char . sprintf("%06s", $urut++);
-					?>
-					<!-- end -->
+						<!-- kode otomatis -->
+						<?php
+						$query = mysqli_query($conn, "SELECT MAX(id_supplier) as maxID FROM supplier");
+						$data = mysqli_fetch_assoc($query);
+						$maxid = $data['maxID'];
+						$urut = (int) substr($maxid, 4);
+						$urut++;
+						$char = 'SUP-';
+						$id_supplier = $char . sprintf("%06s", $urut++);
+						?>
+						<!-- end -->
 
-					<label>Kode Supplier</label>
-					<input type="text" name="id_supplier" class="form-control mb-3" value="<?= $id_supplier ?>" autocomplete="off" readonly>
+						<label>Kode Supplier</label>
+						<input type="text" name="id_supplier" class="form-control mb-3" value="<?= $id_supplier ?>" autocomplete="off" readonly>
 
-					<label>Nama Supplier</label>
-					<input type="text" name="nama_supplier" class="form-control mb-3" placeholder="Nama Supplier" autocomplete="off" required>
+						<label>Nama Supplier</label>
+						<input type="text" name="nama_supplier" class="form-control mb-3" placeholder="Nama Supplier" autocomplete="off" required>
 
-					<label>Alamat</label>
-					<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
+						<label>Alamat</label>
+						<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
 
-					<label>Telp</label>
-					<input type="text" name="telp" class="form-control mb-3" placeholder="Telp" onkeypress="return hanyaAngka(event)" autocomplete="off">
+						<label>Telp</label>
+						<input type="text" name="telp" class="form-control mb-3" placeholder="Telp" onkeypress="return hanyaAngka(event)" autocomplete="off">
 
-					<label>Email</label>
-					<input type="text" name="email" class="form-control mb-3" placeholder="Email" autocomplete="off">
+						<label>Email</label>
+						<input type="text" name="email" class="form-control mb-3" placeholder="Email" autocomplete="off">
 
-					<div class="card-footer text-muted">
-						<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
-						<a href="m_supplier.php" class="btn btn-danger">Batal</a>
-					</div>
+						<div class="card-footer text-muted">
+							<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+							<a href="m_supplier.php" class="btn btn-danger">Batal</a>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 
 	<?php include '../a_footer.php'; ?>
 

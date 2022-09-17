@@ -60,49 +60,9 @@ include '../config/validasi.php';
 						<td></td>
 					<?php else : ?>
 						<td><a href="master_detail_pelanggan.php?id_sales=<?= $lihat['id_sales'] ?>" class="btn btn-info btn-sm">Detail Pelanggan</a></td>
-						<td><a href="#" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit<?= $lihat['id_sales'] ?>">Ubah</a> <a href="config/master_hapus_sales.php?id_sales=<?= $lihat['id_sales'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('hapus data..?')">Hapus</a></td>
+						<td><a href="master_ubah_sales.php?id=<?= $lihat['id_sales'] ?>" type="button" class="btn btn-warning btn-sm">Ubah</a> <a href="config/master_hapus_sales.php?id_sales=<?= $lihat['id_sales'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('hapus data..?')">Hapus</a></td>
 					<?php endif ?>
 				</tr>
-
-				<!-- =========================================== Modal =====================================================-->
-				<div class="modal fade" id="modalEdit<?= $lihat['id_sales'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Ubah Data</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-
-							<div class="modal-body">
-								<form action="config/master_ubah_sales.php" method="post">
-									<label>Kode Sales</label>
-									<input type="text" name="id_sales" class="form-control mb-3" value="<?= $lihat['id_sales'] ?>" readonly>
-
-									<label>Nama Sales</label>
-									<input type="text" name="nama_sales" class="form-control mb-3" placeholder="Nama Sales" value="<?= $lihat['nama_sales'] ?>" autocomplete="off" required>
-
-									<label>Alamat</label>
-									<textarea name="alamat" class="form-control" placeholder="Alamat"><?= $lihat['alamat_sales'] ?></textarea>
-
-									<label>Telp</label>
-									<input type="text" name="telp" class="form-control mb-3" placeholder="Telp" value="<?= $lihat['telp_sales'] ?>" onkeypress="return hanyaAngka(event)" autocomplete="off">
-
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-										<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- =========================================== END Modal =======================================================-->
-
-
-
-
 			<?php endwhile ?>
 		</tbody>
 	</table>

@@ -13,7 +13,6 @@ include '../config/validasi.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="../aset/bootstrap-4.5.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../aset/fontawesome47/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../aset/css/my_style.css">
 
 	<!-- select2 -->
@@ -24,65 +23,63 @@ include '../config/validasi.php';
 </head>
 
 <body>
-	<form method="post">
 
-		<?php include '../a_navbar.php'; ?>
+	<!-- untuk tampil gol produk dan supplier -->
+	<?php
+	$query = mysqli_query($conn, "SELECT * FROM sales ORDER BY nama_sales ASC");
+	?>
 
-		<!-- untuk tampil gol produk dan supplier -->
-		<?php
-
-		$query = mysqli_query($conn, "SELECT * FROM sales ORDER BY nama_sales ASC");
-
-		?>
-
-		<br>
-		<div class="col-md-6 offset-md-3">
+	<div class="row justify-content-center">
+		<div class="col-md-4 mt-5">
 			<div class="card">
 				<div class="card-header">
-					<h4 align="center">Tambah Master Pelanggan</h4>
+					<h4>Tambah Master Pelanggan</h4>
 				</div>
 				<div class="card-body">
 
-					<label>Sales</label>
-					<select name="id_sales" class="form-control mb-3" id="select2">
-						<?php while ($lihat = mysqli_fetch_assoc($query)) :; ?>
-							<option value="<?= $lihat['id_sales'] ?>"><?= $lihat['nama_sales'] ?></option>
-						<?php endwhile ?>
-					</select>
+					<form method="post">
+						<label>Sales</label>
+						<select name="id_sales" class="form-control mb-3" id="select2">
+							<?php while ($lihat = mysqli_fetch_assoc($query)) :; ?>
+								<option value="<?= $lihat['id_sales'] ?>"><?= $lihat['nama_sales'] ?></option>
+							<?php endwhile ?>
+						</select>
 
-					<!-- kode otomatis -->
-					<?php
-					$query = mysqli_query($conn, "SELECT MAX(id_pelanggan) as maxID FROM pelanggan");
-					$data = mysqli_fetch_assoc($query);
-					$maxid = $data['maxID'];
-					$urut = (int) substr($maxid, 4);
-					$urut++;
-					$char = 'PEL-';
-					$id_pelanggan = $char . sprintf("%06s", $urut++);
-					?>
-					<!-- end -->
+						<!-- kode otomatis -->
+						<?php
+						$query = mysqli_query($conn, "SELECT MAX(id_pelanggan) as maxID FROM pelanggan");
+						$data = mysqli_fetch_assoc($query);
+						$maxid = $data['maxID'];
+						$urut = (int) substr($maxid, 4);
+						$urut++;
+						$char = 'PEL-';
+						$id_pelanggan = $char . sprintf("%06s", $urut++);
+						?>
+						<!-- end -->
 
-					<label>Kode Pelanggan</label>
-					<input type="text" name="id_pelanggan" class="form-control mb-3" value="<?= $id_pelanggan ?>" autocomplete="off" readonly>
+						<label>Kode Pelanggan</label>
+						<input type="text" name="id_pelanggan" class="form-control mb-3" value="<?= $id_pelanggan ?>" autocomplete="off" readonly>
 
-					<label>Nama Pelanggan</label>
-					<input type="text" name="nama_pelanggan" class="form-control mb-3" placeholder="Nama Pelanggan" autocomplete="off" required>
+						<label>Nama Pelanggan</label>
+						<input type="text" name="nama_pelanggan" class="form-control mb-3" placeholder="Nama Pelanggan" autocomplete="off" required>
 
-					<label>Alamat</label>
-					<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
+						<label>Alamat</label>
+						<textarea name="alamat" class="form-control" placeholder="Alamat"></textarea>
 
-					<label>Telp</label>
-					<input type="text" name="telp" class="form-control mb-3" placeholder="Telp" onkeypress="return hanyaAngka(event)" autocomplete="off">
+						<label>Telp</label>
+						<input type="text" name="telp" class="form-control mb-3" placeholder="Telp" onkeypress="return hanyaAngka(event)" autocomplete="off">
 
 
-					<div class="card-footer text-muted">
-						<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
-						<a href="m_pelanggan.php" class="btn btn-danger">Batal</a>
-					</div>
+						<div class="card-footer text-muted">
+							<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+							<a href="m_pelanggan.php" class="btn btn-danger">Batal</a>
+						</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 
 	<?php include '../a_footer.php'; ?>
 

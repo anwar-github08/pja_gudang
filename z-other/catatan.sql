@@ -1,0 +1,1 @@
+-- ubah pada barang masuk dan keluar buat halaman sendiri,,,kalau pakai modal loopingnya banyak

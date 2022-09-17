@@ -14,12 +14,8 @@ include '../config/validasi.php';
 
 	<link rel="stylesheet" href="../aset/bootstrap-4.5.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../aset/fontawesome47/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../aset/select2/dist/css/select2.min.css">
 	<link rel="stylesheet" href="../aset/tgl/flatpickr.min.css">
-
-	<!-- untuk datatables -->
 	<link rel="stylesheet" href="../aset/datatables/datatables/css/dataTables.bootstrap4.min.css">
-
 	<link rel="stylesheet" href="../aset/css/my_style.css">
 
 	<link rel="icon" type="image/png" href="../gambar/pakis11.png">
@@ -65,66 +61,11 @@ include '../config/validasi.php';
 					<td><?= $lihat['nama_sales'] ?></td>
 					<td><?= $lihat['nama_pelanggan'] ?></td>
 					<td><a href="detail_barang_keluar.php?id_transaksi_barang_keluar=<?= $lihat['id_transaksi_barang_keluar'] ?>" class="btn btn-info btn-sm">Lihat Barang</a></td>
-					<td><a href="#" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit<?= $lihat['id_transaksi_barang_keluar'] ?>">Ubah</a>
+					<td><a href="ubah_tr_barang_keluar.php?id=<?= $lihat['id_transaksi_barang_keluar'] ?>" type="button" class="btn btn-warning btn-sm">Ubah</a>
 						<a href="config/hapus_transaksi_barang_keluar.php?id_transaksi_barang_keluar=<?= $lihat['id_transaksi_barang_keluar'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('hapus data..?')">Hapus</a>
 					</td>
 
 				</tr>
-
-
-
-				<!-- =========================================== Modal =====================================================-->
-				<div class="modal fade" id="modalEdit<?= $lihat['id_transaksi_barang_keluar'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Ubah Data</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-
-							<div class="modal-body">
-								<form action="config/ubah_transaksi_barang_keluar.php" method="post">
-
-									<?php
-									$querys = mysqli_query($conn, "SELECT * FROM sales ORDER BY nama_sales ASC");
-									$queryp = mysqli_query($conn, "SELECT * FROM pelanggan ORDER BY nama_pelanggan ASC");
-									?>
-									<label>Tanggal</label>
-									<input type="text" name="tgl" id="tgl" class="form-control mb-3" value="<?= date('d-m-Y', strtotime($lihat['tanggal_keluar'])) ?>" placeholder="Tanggal" autocomplete="off" required>
-
-									<label>Sales</label>
-									<select name="id_sales" size="1" class="form-control mb-3" style="width: 100%">
-										<option value="<?= $lihat['id_sales'] ?>"><?= $lihat['nama_sales'] ?></option>
-
-										<?php while ($lihats = mysqli_fetch_assoc($querys)) :; ?>
-											<option value="<?= $lihats['id_sales'] ?>"><?= $lihats['nama_sales'] ?></option>
-										<?php endwhile ?>
-									</select>
-
-									<label>Pelanggan</label>
-									<select name="id_pelanggan" size="1" class="form-control mb-3" style="width: 100%">
-										<option value="<?= $lihat['id_pelanggan'] ?>"><?= $lihat['nama_pelanggan'] ?></option>
-
-										<?php while ($lihatp = mysqli_fetch_assoc($queryp)) :; ?>
-											<option value="<?= $lihatp['id_pelanggan'] ?>"><?= $lihatp['nama_pelanggan'] ?></option>
-										<?php endwhile ?>
-									</select>
-
-									<input type="hidden" name="waktu" value="<?= date('H:i:s', strtotime($lihat['tanggal_keluar'])) ?>">
-									<input type="text" name="id_transaksi_barang_keluar" value="<?= $lihat['id_transaksi_barang_keluar'] ?>">
-
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-										<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- =========================================== END Modal =======================================================-->
 
 			<?php endwhile ?>
 		</tbody>
@@ -132,7 +73,6 @@ include '../config/validasi.php';
 
 	<?php include '../a_footer.php'; ?>
 
-	<script src="../aset/select2/dist/js/select2.min.js"></script>
 	<script src="../aset/tgl/flatpickr.js"></script>
 
 	<!-- untuk datatables -->
@@ -140,21 +80,10 @@ include '../config/validasi.php';
 	<script src="../aset/datatables/datatables/js/dataTables.bootstrap4.min.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			$("select[size=1]").select2();
-		});
-	</script>
-
-	<script>
-		flatpickr("#tgl", {
-			dateFormat: 'd-m-Y'
-		});
 		flatpickr("#sort_tgl", {
 			dateFormat: 'd-m-Y'
 		});
 	</script>
-
-	<!-- untuk datatables -->
 	<script>
 		$(document).ready(function() {
 			var table = $('#tabel_barang').DataTable();

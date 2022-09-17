@@ -69,47 +69,10 @@ include '../config/validasi.php';
 					<td><?= $lihat['nama_barang'] ?></td>
 					<td><?= $lihat['jumlah'] ?></td>
 					<td>
-						<a href="#" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit<?= $lihat['id_barang_masuk'] ?>">Ubah</a>
+						<a href="ubah_br_masuk.php?id=<?= $lihat['id_barang_masuk'] ?>" type="button" class="btn btn-warning btn-sm">Ubah</a>
 						<a href="config/hapus_barang_masuk.php?id_barang_masuk=<?= $lihat['id_barang_masuk'] ?>&id_tr_barang_masuk=<?= $lihat['id_transaksi_barang_masuk'] ?>&id_barang=<?= $lihat['id_barang'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('hapus data..?')">Hapus</a>
 					</td>
 				</tr>
-
-
-				<!-- =========================================== Modal =====================================================-->
-				<div class="modal fade" id="modalEdit<?= $lihat['id_barang_masuk'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Ubah Data</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-
-							<div class="modal-body">
-								<form action="config/ubah_barang_masuk.php" method="post">
-
-									<label>Barang</label>
-									<input type="text" class="form-control" value="<?= $lihat['nama_barang'] ?>" readonly>
-
-									<label>Jumlah</label>
-									<input type="text" name="jumlah" class="form-control" value="<?= $lihat['jumlah'] ?>" autocomplete="off" onkeypress="return hanyaAngka(event)" placeholder="Jumlah" required>
-
-									<input type="hidden" name="id_transaksi_barang_masuk" value="<?= $lihat['id_transaksi_barang_masuk'] ?>">
-									<input type="hidden" name="id_barang_masuk" value="<?= $lihat['id_barang_masuk'] ?>">
-									<input type="hidden" name="id_barang" value="<?= $lihat['id_barang'] ?>">
-									<input type="hidden" name="jumlah_lama" value="<?= $lihat['jumlah'] ?>">
-
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-										<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- =========================================== END Modal =======================================================-->
 
 			<?php endwhile ?>
 		</tbody>

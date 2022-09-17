@@ -13,7 +13,6 @@ include '../config/validasi.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="../aset/bootstrap-4.5.3/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../aset/fontawesome47/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../aset/css/my_style.css">
 
 	<!-- select2 -->
@@ -24,72 +23,72 @@ include '../config/validasi.php';
 </head>
 
 <body>
-	<form method="post">
 
-		<?php include '../a_navbar.php'; ?>
 
-		<!-- untuk tampil gol produk dan supplier -->
-		<?php
-
-		$query = mysqli_query($conn, "SELECT * FROM golongan_produk ORDER BY nama_golongan_produk ASC");
-		$query1 = mysqli_query($conn, "SELECT * FROM supplier ORDER BY nama_supplier ASC");
-		?>
-		<br>
-		<div class="col-md-6 offset-md-3">
+	<!-- untuk tampil gol produk dan supplier -->
+	<?php
+	$query = mysqli_query($conn, "SELECT * FROM golongan_produk ORDER BY nama_golongan_produk ASC");
+	$query1 = mysqli_query($conn, "SELECT * FROM supplier ORDER BY nama_supplier ASC");
+	?>
+	<div class="row justify-content-center">
+		<div class="col-md-4 mt-5">
 			<div class="card">
 				<div class="card-header">
-					<h4 align="center">Tambah Master Barang</h4>
+					<h4>Tambah Master Barang</h4>
 				</div>
 				<div class="card-body">
+					<form method="post">
 
-					<label>Golongan Produk</label>
-					<select name="id_golongan_produk" class="form-control mb-4">
-						<?php while ($lihat = mysqli_fetch_assoc($query)) :; ?>
-							<option value="<?= $lihat['id_golongan_produk'] ?>"><?= $lihat['nama_golongan_produk'] ?></option>
-						<?php endwhile ?>
-					</select>
+						<label>Golongan Produk</label>
+						<select name="id_golongan_produk" class="form-control mb-4">
+							<?php while ($lihat = mysqli_fetch_assoc($query)) :; ?>
+								<option value="<?= $lihat['id_golongan_produk'] ?>"><?= $lihat['nama_golongan_produk'] ?></option>
+							<?php endwhile ?>
+						</select>
 
-					<label>Supplier</label>
-					<select name="id_supplier" class="form-control mb-4">
-						<?php while ($lihat1 = mysqli_fetch_assoc($query1)) :; ?>
-							<option value="<?= $lihat1['id_supplier'] ?>"><?= $lihat1['nama_supplier'] ?></option>
-						<?php endwhile ?>
-					</select>
+						<label>Supplier</label>
+						<select name="id_supplier" class="form-control mb-4">
+							<?php while ($lihat1 = mysqli_fetch_assoc($query1)) :; ?>
+								<option value="<?= $lihat1['id_supplier'] ?>"><?= $lihat1['nama_supplier'] ?></option>
+							<?php endwhile ?>
+						</select>
 
-					<!-- kode otomatis -->
-					<?php
-					$query = mysqli_query($conn, "SELECT MAX(id_barang) as maxID FROM barang");
-					$data = mysqli_fetch_assoc($query);
-					$maxid = $data['maxID'];
-					$urut = (int) substr($maxid, 4);
-					$urut++;
-					$char = 'BRG-';
-					$id_barang = $char . sprintf("%06s", $urut++);
-					?>
-					<!-- end -->
+						<!-- kode otomatis -->
+						<?php
+						$query = mysqli_query($conn, "SELECT MAX(id_barang) as maxID FROM barang");
+						$data = mysqli_fetch_assoc($query);
+						$maxid = $data['maxID'];
+						$urut = (int) substr($maxid, 4);
+						$urut++;
+						$char = 'BRG-';
+						$id_barang = $char . sprintf("%06s", $urut++);
+						?>
+						<!-- end -->
 
-					<label>Kode Barang</label>
-					<input type="text" name="id_barang" class="form-control mb-3" value="<?= $id_barang ?>" autocomplete="off" readonly>
+						<label>Kode Barang</label>
+						<input type="text" name="id_barang" class="form-control mb-3" value="<?= $id_barang ?>" autocomplete="off" readonly>
 
-					<label>Nama Barang</label>
-					<input type="text" name="nama_barang" class="form-control mb-3" placeholder="Nama Barang" autocomplete="off" required>
+						<label>Nama Barang</label>
+						<input type="text" name="nama_barang" class="form-control mb-3" placeholder="Nama Barang" autocomplete="off" required>
 
-					<label>Satuan</label>
-					<select name="satuan" class="form-control mb-3">
-						<option value="PCS">PCS</option>
-						<option value="BOTOL">BOTOL</option>
-						<option value="ZAK">ZAK</option>
-					</select>
+						<label>Satuan</label>
+						<select name="satuan" class="form-control mb-3">
+							<option value="PCS">PCS</option>
+							<option value="BOTOL">BOTOL</option>
+							<option value="ZAK">ZAK</option>
+						</select>
 
 
-					<div class="card-footer text-muted">
-						<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
-						<a href="m_barang.php" class="btn btn-danger">Batal</a>
-					</div>
+						<div class="card-footer text-muted">
+							<button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
+							<a href="m_barang.php" class="btn btn-danger">Batal</a>
+						</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 
 	<?php include '../a_footer.php'; ?>
 
