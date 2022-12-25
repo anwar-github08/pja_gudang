@@ -30,7 +30,8 @@ include '../config/validasi.php';
 	<?php include '../a_navbar.php'; ?>
 	<h4>Stok</h4>
 	<hr>
-	<!-- <a href="stok_awal.php" class="btn btn-primary">Update Stok Manual</a> <a href="input_barang_masuk.php" class="btn btn-primary btn-sm mb-3">Tambah Barang Masuk</a> <a href="input_barang_keluar.php" class="btn btn-danger btn-sm mb-3">Tambah Barang Keluar</a> -->
+	<a href="stok_awal.php" class="btn btn-primary btn-sm mb-2">Update Stok Manual</a>
+	<!-- <a href="input_barang_masuk.php" class="btn btn-primary btn-sm mb-3">Tambah Barang Masuk</a> <a href="input_barang_keluar.php" class="btn btn-danger btn-sm mb-3">Tambah Barang Keluar</a> -->
 	<table id="tabel_barang" class="table table-striped table-bordered table-dark">
 		<thead>
 			<tr>
